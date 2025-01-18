@@ -1,0 +1,16 @@
+Ejecutar
+
+# Construir y levantar los contenedores
+docker-compose up -d --build
+
+# Instalar las dependencias con Composer
+docker exec -it poblacion-backend composer install
+
+# Generar la clave de la aplicación
+docker exec -it poblacion-backend php artisan key:generate
+
+# Ejecutar las migraciones y seeders
+docker exec -it poblacion-backend php artisan migrate --seed
+
+# Ver estatus de servicios
+docker ps

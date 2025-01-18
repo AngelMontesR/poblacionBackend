@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: poblacion-backend
+    container_name: poblacion-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www
+      - ./storage:/var/www/storage
+    networks:
+      - laravel-net
+    environment:
+      APP_ENV: local
+      APP_DEBUG: 'true'
+      APP_KEY: ${APP_KEY}
+
+  mysql:
+    image: mysql:8.0
+    container_name: poblacion-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: poblacion
+      MYSQL_USER: angel
+      MYSQL_PASSWORD: montes
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - laravel-net
+
+volumes:
+  db-data:
+
+networks:
+  laravel-net:
