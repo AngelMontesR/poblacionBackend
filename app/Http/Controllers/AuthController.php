@@ -18,12 +18,11 @@ class AuthController extends Controller
         try {
             $credenciales = $request->only('email', 'password');
 
-            // Intentar autenticar al usuario
+            // Autenticar el usuario con las credenciales
             if (Auth::attempt($credenciales)) {
                 $usuario = Auth::user();
-                // Crear un token con Sanctum
+                //Creacion de token
                 $token = $usuario->createToken('token')->plainTextToken;
-                // Devolver el token al usuario en la respuesta
                 return response()->json([
                     'message' => 'Login exitoso',
                     'token' => $token
