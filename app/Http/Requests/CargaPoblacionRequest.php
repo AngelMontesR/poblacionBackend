@@ -11,7 +11,7 @@ class CargaPoblacionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->can('poblacion.carga');
     }
 
     /**
@@ -22,7 +22,7 @@ class CargaPoblacionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+           'archivo' => 'required|mimes:xlsx,csv'
         ];
     }
 }
