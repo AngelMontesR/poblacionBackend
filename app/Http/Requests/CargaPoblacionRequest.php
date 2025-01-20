@@ -22,7 +22,7 @@ class CargaPoblacionRequest extends FormRequest
     public function rules(): array
     {
         return [
-           'archivo' => 'required|mimes:xlsx,csv'
+           'archivo' => 'required|mimes:csv'
         ];
     }
 }

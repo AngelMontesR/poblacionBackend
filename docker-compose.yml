@@ -12,6 +12,7 @@ services:
     volumes:
       - .:/var/www
       - ./storage:/var/www/storage
+      - ./storage/app:/var/www/storage/app
     networks:
       - laravel-net
     environment:
@@ -31,8 +32,10 @@ services:
       MYSQL_PASSWORD: montes
     volumes:
       - db-data:/var/lib/mysql
+      - ./storage/app:/var/www/storage/app
     networks:
       - laravel-net
+    command: --local-infile=1
 
 volumes:
   db-data:
