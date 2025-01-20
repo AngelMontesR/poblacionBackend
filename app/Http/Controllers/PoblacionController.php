@@ -18,12 +18,17 @@ class PoblacionController extends Controller
             //Creacion de tabla temporal
             $nombreTabla = $this->tablaTemporal();
 
-            //Creacion de rutas para almacenamiento de archivo
-            $carpeta            = 'carga-temporal';
-            $nombreArchivo      = $request->file('archivo')->getClientOriginalName();
-            $rutaFinal          = $carpeta . DIRECTORY_SEPARATOR . $nombreArchivo;
+            // Creación de rutas para almacenamiento de archivo
+            $carpeta = 'public' . DIRECTORY_SEPARATOR . 'carga-temporal';
+            $nombreArchivo = $request->file('archivo')->getClientOriginalName();
+            $rutaFinal = $carpeta . DIRECTORY_SEPARATOR . $nombreArchivo;
 
-            //Carga de archivo a ubicacion servidor
+            // Verificar si la carpeta existe, si no, crearla
+            if (!Storage::exists($carpeta)) {
+                Storage::makeDirectory($carpeta);
+            }
+
+            // Carga de archivo a ubicación en el servidor
             Storage::put($rutaFinal, file_get_contents($request->file('archivo')->getRealPath()));
 
             //Verifica si existe el archivo antes de realizar el load data
@@ -33,11 +38,12 @@ class PoblacionController extends Controller
             }
 
             //Obtenemos la ruta completa para indicar ubicacion del archivo a cargar
-            $rutaCompleta = storage_path($rutaFinal);
+            $rutaCompleta = "/var/www/storage/app/public/carga-temporal" . DIRECTORY_SEPARATOR . $nombreArchivo;
 
             DB::statement("LOAD DATA LOCAL INFILE '$rutaCompleta' INTO TABLE $nombreTabla
                             FIELDS TERMINATED BY ','
                             LINES TERMINATED BY '\n'
+                            IGNORE 1 LINES
                             (nombre, paterno, materno, telefono, calle, numero_exterior, numero_interior, colonia, cp)");
 
             $registros = DB::select("select * from $nombreTabla");

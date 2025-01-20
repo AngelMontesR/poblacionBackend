@@ -15,11 +15,8 @@ docker exec -it poblacion-backend php artisan migrate --seed
 # Ver estatus de servicios
 docker ps
 
-
-
 docker exec -it poblacion-backend bash
 ls /var/www/storage/app/carga-temporal/
 
 
-var/www/storage/carga-temporal/layout-cargamasiva.csv
-
+docker exec -it poblacion-backend bash
