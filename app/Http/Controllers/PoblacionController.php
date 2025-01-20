@@ -40,11 +40,8 @@ class PoblacionController extends Controller
             //Obtenemos la ruta completa para indicar ubicacion del archivo a cargar
             $rutaCompleta = "/var/www/storage/app/public/carga-temporal" . DIRECTORY_SEPARATOR . $nombreArchivo;
 
-            DB::statement("LOAD DATA LOCAL INFILE '$rutaCompleta' INTO TABLE $nombreTabla
-                            FIELDS TERMINATED BY ','
-                            LINES TERMINATED BY '\n'
-                            IGNORE 1 LINES
-                            (nombre, paterno, materno, telefono, calle, numero_exterior, numero_interior, colonia, cp)");
+            //Load Data
+            $this->cargaTablaTemporal($rutaCompleta,$nombreTabla);
 
             $registros = DB::select("select * from $nombreTabla");
             $this->ejecutarStoreProcedure();
@@ -52,6 +49,19 @@ class PoblacionController extends Controller
         } catch (\Exception $e) {
             Log::info("Error al importar los datos: ".$e->getMessage());
             return response()->json(["error" => "Error al importar los datos"], 500);
+        }
+    }
+
+    private function cargaTablaTemporal($ruta,$tabla){
+      try {
+            DB::statement("LOAD DATA LOCAL INFILE '$ruta' INTO TABLE $tabla
+            FIELDS TERMINATED BY ','
+            LINES TERMINATED BY '\n'
+            IGNORE 1 LINES
+            (nombre, paterno, materno, telefono, calle, numero_exterior, numero_interior, colonia, cp)");
+        } catch (\Exception $th) {
+            Log::error("Error en la carga de registros en tabla temporal");
+            return false;
         }
     }
 
