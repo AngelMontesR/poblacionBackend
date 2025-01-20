@@ -36,16 +36,13 @@ class PoblacionController extends Controller
             $rutaCompleta = storage_path($rutaFinal);
 
             DB::statement("LOAD DATA LOCAL INFILE '$rutaCompleta' INTO TABLE $nombreTabla
-                           FIELDS TERMINATED BY ','
-                           LINES TERMINATED BY '\n'
-                           (nombre, paterno, materno, telefono, calle, numero_exterior, numero_interior, colonia, cp)");
+                            FIELDS TERMINATED BY ','
+                            LINES TERMINATED BY '\n'
+                            (nombre, paterno, materno, telefono, calle, numero_exterior, numero_interior, colonia, cp)");
 
             $registros = DB::select("select * from $nombreTabla");
-
-            dd("terminamos", $registros);
-
-
-
+            $this->ejecutarStoreProcedure();
+            return response()->json(['message' => 'Carga Exitosa'], 200);
         } catch (\Exception $e) {
             Log::info("Error al importar los datos: ".$e->getMessage());
             return response()->json(["error" => "Error al importar los datos"], 500);
@@ -55,14 +52,14 @@ class PoblacionController extends Controller
 
     private function tablaTemporal():String{
         try {
-            $tabla = 'temp_table_' . uniqid();
+            $tabla = 'poblacion_temporal';
             Log::info("Creacion de tabla temporal: ".$tabla);
             DB::statement("
                 CREATE TEMPORARY TABLE $tabla (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    nombre VARCHAR(250),
-                    paterno VARCHAR(250),
-                    materno VARCHAR(250),
+                    nombre VARCHAR(250) COLLATE utf8mb4_unicode_ci,
+                    paterno VARCHAR(250) COLLATE utf8mb4_unicode_ci,
+                    materno VARCHAR(250) COLLATE utf8mb4_unicode_ci,
                     telefono VARCHAR(250),
                     calle VARCHAR(250),
                     numero_exterior VARCHAR(250),
@@ -76,6 +73,18 @@ class PoblacionController extends Controller
         } catch (\Exception $th) {
             Log::info("Ocurrio un error al crear tabla temporal: ".$tabla);
             return null;
+        }
+    }
+
+    private function ejecutarStoreProcedure()
+    {
+        try {
+            DB::statement('CALL poblacion.migracion_datos;');
+            Log::info("Se ejecuto correctamente el store procedure");
+            return true;
+        } catch (\Exception $th) {
+            Log::info("Ocurrio un error al ejecutar el store procedure");
+            return false;
         }
     }
 

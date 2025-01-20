@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('direcciones', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->unsignedBigInteger('id_persona');
+            $table->foreign('id_persona')->references('id')->on('personas');
             $table->text('calle');
             $table->text('numero_exterior');
             $table->text('numero_interior')->nullable();
