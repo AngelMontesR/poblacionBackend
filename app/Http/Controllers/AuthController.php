@@ -22,10 +22,12 @@ class AuthController extends Controller
             if (Auth::attempt($credenciales)) {
                 $usuario = Auth::user();
                 //Creacion de token
+                $permisos = $usuario->getAllPermissions()->pluck('name');
                 $token = $usuario->createToken('token')->plainTextToken;
                 return response()->json([
                     'message' => 'Login exitoso',
-                    'token' => $token
+                    'token' => $token,
+                    'permisos' => $permisos
                 ], 200);
             } else {
                 return response()->json(['error' => 'Credenciales incorrectas'], 401);
