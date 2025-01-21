@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Http\Request;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -34,6 +35,16 @@ class AuthController extends Controller
             }
         } catch (\Exception $th) {
             Log::error("Error al intentar iniciar sesión: ".$th->getMessage());
+            return response()->json(["error" => "Error en login"], 500);
+        }
+    }
+
+    public function validarToken(Request $request)
+    {
+        try {
+            return response()->json($request->user());
+        } catch (\Exception $th) {
+            Log::error("Error al validar token ".$th->getMessage());
             return response()->json(["error" => "Error en login"], 500);
         }
     }

@@ -22,5 +22,8 @@ Route::middleware('auth:sanctum')->group(function () {
     /*---------------------- Rutas Poblacion -----------------------*/
     Route::post('carga-archivo', [PoblacionController::class, 'cargaArchivo']);
     Route::get('obtener-poblacion', [PoblacionController::class, 'obtenerPoblacion']);
+
+    /*---------------------- Rutas Auth -----------------------*/
+    Route::post('validar-token', [AuthController::class, 'validarToken']);
 });
 
