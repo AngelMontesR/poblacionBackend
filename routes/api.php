@@ -19,6 +19,8 @@ use App\Http\Controllers\PoblacionController;
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    /*---------------------- Rutas Poblacion -----------------------*/
     Route::post('carga-archivo', [PoblacionController::class, 'cargaArchivo']);
+    Route::get('obtener-poblacion', [PoblacionController::class, 'obtenerPoblacion']);
 });
 

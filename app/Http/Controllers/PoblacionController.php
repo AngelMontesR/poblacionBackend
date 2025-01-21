@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CargaPoblacionRequest;
+use App\Http\Requests\ConsultaPoblacionRequest;
+use App\Http\Resources\PoblacionResource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use App\Models\Persona;
 
 class PoblacionController extends Controller
 {
@@ -50,6 +53,17 @@ class PoblacionController extends Controller
             Log::info("Error al importar los datos: ".$e->getMessage());
             return response()->json(["error" => "Error al importar los datos"], 500);
         }
+    }
+
+    public function obtenerPoblacion(ConsultaPoblacionRequest $request)
+    {
+      try {
+        $poblacion = Persona::with('direcciones','telefonos')->paginate(100);
+        return new PoblacionResource($poblacion);
+      } catch (\Exception $e) {
+        Log::info("Error al consultar los datos: ".$e->getMessage());
+        return response()->json(["error" => "Error al consultar los datos:"], 500);
+      }
     }
 
     private function cargaTablaTemporal($ruta,$tabla){
