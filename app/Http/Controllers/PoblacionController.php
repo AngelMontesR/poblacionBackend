@@ -55,6 +55,9 @@ class PoblacionController extends Controller
         }
     }
 
+    /*
+    * Funcion que retorna los datos de las personas
+    */
     public function obtenerPoblacion(ConsultaPoblacionRequest $request)
     {
       try {
@@ -66,6 +69,9 @@ class PoblacionController extends Controller
       }
     }
 
+    /*
+     * Funcion que permite cargar informacion a tabla temporal
+     */
     private function cargaTablaTemporal($ruta,$tabla){
       try {
             DB::statement("LOAD DATA LOCAL INFILE '$ruta' INTO TABLE $tabla
@@ -79,7 +85,9 @@ class PoblacionController extends Controller
         }
     }
 
-
+    /*
+    * Funcion que permite la creacion de la tabla temporal
+    */
     private function tablaTemporal():String{
         try {
             $tabla = 'poblacion_temporal';
@@ -106,6 +114,9 @@ class PoblacionController extends Controller
         }
     }
 
+    /*
+    * Funcion que permite la ejecucion del Store Procedure para migrar los datos tabla temporal a personas,telefono,direccion
+    */
     private function ejecutarStoreProcedure()
     {
         try {
