@@ -19,6 +19,7 @@ services:
       APP_ENV: local
       APP_DEBUG: 'true'
       APP_KEY: ${APP_KEY}
+    command: bash -c "composer install && php -S 0.0.0.0:8000 -t public"
 
   mysql:
     image: mysql:8.0

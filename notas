@@ -6,6 +6,9 @@ docker-compose up -d --build
 # Instalar las dependencias con Composer
 docker exec -it poblacion-backend composer install
 
+docker exec -it poblacion-backend bash -c "cp /var/www/.env.example /var/www/.env"
+
+
 # Generar la clave de la aplicación
 docker exec -it poblacion-backend php artisan key:generate
 
