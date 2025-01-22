@@ -26,7 +26,9 @@ Antes de continuar, asegúrate de tener instalado Docker en tu máquina. Puedes 
    ```bash
    docker-compose up -d --build
    ```
-    # Construir .env
+    ### Esperar 10 minutos aproximadamente para que se instalen las dependencias y poder ejecutar los siguientes comandos
+
+    #### Construir .env
     ```bash
     docker exec -it poblacion-backend bash -c "cp /var/www/.env.example /var/www/.env"
     ```
