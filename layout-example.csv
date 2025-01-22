@@ -1,0 +1,17 @@
+﻿nombre,paterno,materno,telefono,calle,numero_exterior, numero_interior,colonia,cp
+Juan,Pérez,López,5551231111,Av. Revolución,101,3A,Tacubaya,11870
+María,González,Sánchez,5559872222,Calle Morelos,202,B2,Escandón,11800
+Carlos,Ramírez,Gómez,5552343333,Av. Patriotismo,303,-,San Pedro de los Pinos,3800
+Ana,Herrera,Morales,5558764444,Av. Oaxaca,404,1,Narvarte,3020
+Pedro,Martínez,Cruz,5557655555,Calle Palma,505,4,Mixcoac,3910
+Elena,Torres,Fernández,5553456666,Av. División del Norte,606,B1,Portales,3300
+Luis,Gutiérrez,Ortiz,5556787777,Calle San Borja,707,-,Nápoles,3840
+Sofía,Mendoza,Jiménez,5554328888,Calle Emerson,808,3A,Polanco,11560
+Juan,Pérez,López,5551239999,Av. Periférico,909,-,Santa Fe,1219
+María,González,Sánchez,5559871010,Av. Toluca,1001,-,Álvaro Obregón,1110
+Carlos,Ramírez,Gómez,5552342020,Calle Juárez,1102,-,San Ángel,1060
+Ana,Herrera,Morales,5558763030,Av. Popocatépetl,1203,2A,Ajusco,4310
+Pedro,Martínez,Cruz,5557654040,Calle Londres,1304,B,Zona Rosa,6600
+Elena,Torres,Fernández,5553455050,Av. Cuauhtémoc,1405,1,Doctores,6720
+Luis,Gutiérrez,Ortiz,5556786060,Calle Venustiano,1506,5,Tabacalera,6030
+Sofía,Mendoza,Jiménez,5554327070,Av. Hidalgo,1607,-,Buenavista,6350
