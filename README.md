@@ -26,17 +26,10 @@ Antes de continuar, asegúrate de tener instalado Docker en tu máquina. Puedes 
    ```bash
    docker-compose up -d --build
    ```
-
-   ### Instalar las dependencias con Composer
-   ```bash
-   docker exec -it poblacion-backend composer install
-   ```
-
-   ### Generar la clave de la aplicación
-   ```bash
-   docker exec -it poblacion-backend php artisan key:generate
-   ```
-
+    # Construir .env
+    ```bash
+    docker exec -it poblacion-backend bash -c "cp /var/www/.env.example /var/www/.env"
+    ```
    ### Ejecutar las migraciones y seeders
    ```bash
    docker exec -it poblacion-backend php artisan migrate --seed
