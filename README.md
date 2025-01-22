@@ -18,15 +18,9 @@ Antes de continuar, asegúrate de tener instalado Docker en tu máquina. Puedes 
 
 ## Instrucciones para iniciar el proyecto
 
-1. Clona este repositorio en tu máquina local:
-   ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd <NOMBRE_DEL_PROYECTO>
-   ```
+1. Tener abierta tu applicacion de Docker.
 
-2. Asegúrate de tener Docker instalado y en ejecución.
-
-3. Ejecuta los siguientes comandos en el orden indicado:
+2. Ejecuta los siguientes comandos en el orden indicado dentro de la carpeta del proyecto:
 
    ### Construir y levantar los contenedores
    ```bash
@@ -48,7 +42,7 @@ Antes de continuar, asegúrate de tener instalado Docker en tu máquina. Puedes 
    docker exec -it poblacion-backend php artisan migrate --seed
    ```
 
-4. Verifica el estado de los servicios:
+3. Verifica el estado de los servicios:
    ```bash
    docker ps
    ```
