@@ -3,14 +3,8 @@ Ejecutar
 # Construir y levantar los contenedores
 docker-compose up -d --build
 
-# Instalar las dependencias con Composer
-docker exec -it poblacion-backend composer install
-
+# Instalar .env
 docker exec -it poblacion-backend bash -c "cp /var/www/.env.example /var/www/.env"
-
-
-# Generar la clave de la aplicación
-docker exec -it poblacion-backend php artisan key:generate
 
 # Ejecutar las migraciones y seeders
 docker exec -it poblacion-backend php artisan migrate --seed
