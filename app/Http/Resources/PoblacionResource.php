@@ -14,6 +14,19 @@ class PoblacionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $data = parent::toArray($request);
+
+        if (isset($data['links'])) {
+            $data['links'] = array_map(function ($link) {
+                if ($link['label'] == 'Next &raquo;') {
+                    $link['label'] = 'Siguiente';
+                } elseif ($link['label'] == '&laquo; Previous') {
+                    $link['label'] = 'Anterior';
+                }
+                return $link;
+            }, $data['links']);
+        }
+
+        return $data;
     }
 }
