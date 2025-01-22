@@ -39,7 +39,8 @@ Antes de continuar, asegúrate de tener instalado Docker en tu máquina. Puedes 
    ```bash
    docker ps
    ```
----
+
+4. Se comparte Layout Example para la carga de datos
 
 ## Notas
 - Asegúrate de que los puertos necesarios para los servicios no estén en uso por otras aplicaciones.
