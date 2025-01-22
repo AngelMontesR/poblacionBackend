@@ -47,6 +47,11 @@ return new class extends Migration
                         LEAVE read_loop;
                     END IF;
 
+                    -- Validar si el nombre no existe v_nombre , no registrar ese registro
+                    IF v_nombre IS NULL OR v_nombre = "" THEN
+                        LEAVE read_loop;
+                    END IF;
+
                     -- Persona
                     IF NOT EXISTS (
                         SELECT 1

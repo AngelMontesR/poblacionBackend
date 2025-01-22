@@ -47,7 +47,10 @@ class PoblacionController extends Controller
             $this->cargaTablaTemporal($rutaCompleta,$nombreTabla);
 
             $registros = DB::select("select * from $nombreTabla");
+            Log::info("Registros cargados: ".count($registros));
+            Log::info($registros);
             $this->ejecutarStoreProcedure();
+            Storage::delete($rutaFinal);
             return response()->json(['message' => 'Carga Exitosa'], 200);
         } catch (\Exception $e) {
             Log::info("Error al importar los datos: ".$e->getMessage());
